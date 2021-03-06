@@ -79,11 +79,11 @@ def process_image(s3_object_path):
                     'Value': result
                 },
                 {
-                    'Key': 'InstanceProcessed',
+                    'Key': 'ClassifiedBy',
                     'Value': instance_id
-                }                
+                },
                 {
-                    'Key': 'DateProcessed',
+                    'Key': 'ClassifiedOn',
                     'Value': datetime.now(timezone.utc)
                 }                               
             ]
