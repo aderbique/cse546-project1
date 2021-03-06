@@ -3,13 +3,24 @@ import boto3
 from s3_url import S3Url
 from image_classification import classify
 import time
+from datetime import datetime,timezone
+import subprocess
 
-#get client
-sqs = boto3.client('sqs', region_name='us-east-1')
-s3 = boto3.client('s3')
-
+#Define AWS Region
+aws_region='us-east-1'
 #SQS Queue URL
 queue_url = 'https://sqs.us-east-1.amazonaws.com/170322465562/queue.fifo'
+
+
+
+#Instantiate Clients
+sqs = boto3.client('sqs', region_name=aws_region)
+s3 = boto3.client('s3')
+ec2 = boto3.client('ec2', region_name=aws_region)
+
+#Obtain Instance ID of instance
+r = request.get('http://169.254.169.254/latest/meta-data/instance-id')
+instance_id = r.text
 
 def get_num_messages_available():
     """ Returns the number of messages in the queue """
@@ -60,9 +71,21 @@ def process_image(s3_object_path):
         Tagging={
             'TagSet': [
                 {
+                    'Key': 'Image',
+                    'Value': s.key
+                },
+                {
                     'Key': 'Classification',
                     'Value': result
                 },
+                {
+                    'Key': 'InstanceProcessed',
+                    'Value': instance_id
+                }                
+                {
+                    'Key': 'DateProcessed',
+                    'Value': datetime.now(timezone.utc)
+                }                               
             ]
         }
     )
@@ -75,4 +98,5 @@ while get_num_messages_available() > 0:
     print("Successfully Processed {}".format(s3_object_path))
     time.sleep(1)
 
-print("Job Complete")
+print("Job Complete. Shutting Down")
+ec2.stop_instances(InstanceIds=instance_id)
