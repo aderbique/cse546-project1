@@ -5,6 +5,7 @@ from image_classification import classify
 import time
 from datetime import datetime,timezone
 import subprocess
+import requests
 
 #Define AWS Region
 aws_region='us-east-1'
@@ -19,7 +20,7 @@ s3 = boto3.client('s3')
 ec2 = boto3.client('ec2', region_name=aws_region)
 
 #Obtain Instance ID of instance
-r = request.get('http://169.254.169.254/latest/meta-data/instance-id')
+r = requests.get('http://169.254.169.254/latest/meta-data/instance-id')
 instance_id = r.text
 
 def get_num_messages_available():
