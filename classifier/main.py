@@ -2,6 +2,7 @@ import os
 import boto3
 from s3_url import S3Url
 from image_classification import classify
+import time
 
 #get client
 sqs = boto3.client('sqs', region_name='us-east-1')
@@ -72,5 +73,6 @@ while get_num_messages_available() > 0:
     process_image(s3_object_path)
     delete_message(receipt_handle)
     print("Successfully Processed {}".format(s3_object_path))
+    time.sleep(1)
 
 print("Job Complete")
