@@ -44,7 +44,7 @@ def process_image(s3_object_path):
     # Parse the path
     s = S3Url(s3_object_path)
     # Download the object to /tmp
-    s3.download_file(s3.bucket, s3.key, f'/tmp/{s.key}')
+    s3.download_file(s.bucket, s3.key, f'/tmp/{s.key}')
 
     #Run classificaiton on image
     result = classify(f'/tmp/{s.key}')
