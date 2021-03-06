@@ -4,9 +4,6 @@ from werkzeug.utils import secure_filename
 import boto3
 from botocore.exceptions import NoCredentialsError
 
-ACCESS_KEY = 'AKIASPKACSMNCKLXTNKC'
-SECRET_KEY = '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'
-
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024
 app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png', '.gif']
@@ -23,7 +20,7 @@ def upload_file_to_s3(file, bucket_name):
     Docs: http://boto3.readthedocs.io/en/latest/guide/s3.html
     """
 
-    s3 = boto3.client("s3", aws_access_key_id=ACCESS_KEY, aws_secret_access_key=SECRET_KEY)
+    s3 = boto3.client("s3")
 
     try:
 
