@@ -100,4 +100,4 @@ while get_num_messages_available() > 0:
     time.sleep(1)
 
 print("Job Complete. Shutting Down")
-ec2.stop_instances(InstanceIds=instance_id)
+ec2.stop_instances(InstanceIds=[instance_id])
