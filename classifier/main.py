@@ -1,6 +1,7 @@
 import os
 import boto3
 from s3_url import S3Url
+from image_classification import classify
 
 #get client
 sqs = boto3.client('sqs', region_name='us-east-1')
@@ -39,9 +40,12 @@ def delete_message(receipt_handle):
 
 def process_image(s3_object_path):
     """ Retrieves image from s3, classifiess the image, and then writes the result to S3 """
+    # Parse the path
     s = S3Url(s3_object_path)
+    # Download the object to /tmp
     s3_resource.Object(s.bucket, s.key).download_file(f'/tmp/{s.key}')
 
+    
 
 #while get_num_messages_available() > 0:
     #print("Time to process an image")
