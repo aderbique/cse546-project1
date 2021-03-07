@@ -7,7 +7,7 @@ from botocore.exceptions import NoCredentialsError
 app = Flask(__name__)
 #app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024
 app.config['UPLOAD_PATH'] = 'uploads'
-app.config["S3_LOCATION"] = 'http://{}.s3.amazonaws.com/'.format('cse546-project1')
+app.config["S3_LOCATION"] = 's3://{}/'.format('cse546-project1')
 
 sqs = boto3.client('sqs', region_name='us-east-1')
 
