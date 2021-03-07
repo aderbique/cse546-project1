@@ -86,13 +86,13 @@ def process_image(s3_object_path):
                 },
                 {
                     'Key': 'ClassifiedOn',
-                    'Value': datetime.now(timezone.utc)
+                    'Value': str(datetime.now(timezone.utc))
                 }                               
             ]
         }
     )
     # Add to table entries
-    put_classification(s.key,result,s3_object_Path)
+    put_classification(s.key,result,s3_object_path)
 
 while get_num_messages_available() > 0:
     print("Retrieving Image Link from SQS")
@@ -100,7 +100,7 @@ while get_num_messages_available() > 0:
     process_image(s3_object_path)
     delete_message(receipt_handle)
     print("Successfully Processed {}".format(s3_object_path))
-    time.sleep(1)
+    #time.sleep(1)
 
 print("Job Complete. Shutting Down")
-ec2.stop_instances(InstanceIds=[instance_id])
+#ec2.stop_instances(InstanceIds=[instance_id])
