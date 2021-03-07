@@ -5,8 +5,7 @@ import boto3
 from botocore.exceptions import NoCredentialsError
 
 app = Flask(__name__)
-app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024
-app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png', '.gif']
+#app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024
 app.config['UPLOAD_PATH'] = 'uploads'
 app.config["S3_LOCATION"] = 'http://{}.s3.amazonaws.com/'.format('cse546-project1')
 
@@ -49,9 +48,6 @@ def upload_files():
         if uploaded_file.filename != '':
             filename = secure_filename(uploaded_file.filename)
             if filename != '':
-                file_ext = os.path.splitext(filename)[1]
-                if file_ext not in app.config['UPLOAD_EXTENSIONS']:
-                    abort(400)
                 uploaded = upload_file_to_s3(uploaded_file, 'cse546-project1')
 
                 # Get the queue. This returns an SQS.Queue instance
