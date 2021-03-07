@@ -6,6 +6,7 @@ import time
 from datetime import datetime,timezone
 import subprocess
 import requests
+from put_classification import put_classification
 
 #Define AWS Region
 aws_region='us-east-1'
@@ -90,6 +91,8 @@ def process_image(s3_object_path):
             ]
         }
     )
+    # Add to table entries
+    put_classification(s.key,result,s3_object_Path)
 
 while get_num_messages_available() > 0:
     print("Retrieving Image Link from SQS")
