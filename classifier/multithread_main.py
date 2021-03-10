@@ -6,23 +6,16 @@ import time
 from datetime import datetime,timezone
 import subprocess
 import requests
+#import threading
+import multiprocessing
+import sys
 
 #Define AWS Region
 aws_region='us-east-1'
 #SQS Queue URL
 queue_url = 'https://sqs.us-east-1.amazonaws.com/170322465562/queue.fifo'
 
-try:
-  run_cont =  os.environ['RUN_CONTINUOUSLY']
-except:
-  print("Did not find RUN_CONTINUOUSLY environment variable. Defaulting to False.")
-  run_cont = False
 
-try: 
-  shutdown_after = os.environ['SHUTDOWN_AFTER']
-except:
-  print("Did not find SHUTDOWN_AFTER environment variable. Defaulting to False.")
-  shutdown_after = False
 
 #Instantiate Clients
 sqs = boto3.client('sqs', region_name=aws_region)
@@ -49,6 +42,9 @@ def get_latest_message():
         VisibilityTimeout=10,
         WaitTimeSeconds=0
         )    
+    print("lololol")
+    print(response)
+    print("lololol")
     message = response['Messages'][0]
     receipt_handle = message['ReceiptHandle']
     s3_object_path = message['Body']
@@ -115,16 +111,32 @@ def process_image(s3_object_path):
     # Add to table entries
     put_classification(s.key,result,s3_object_path)
 
-while get_num_messages_available() > 0:
-    try:
-      print("Retrieving Image Link from SQS")
-      s3_object_path, receipt_handle = get_latest_message()
-      process_image(s3_object_path)
-      delete_message(receipt_handle)
-      print("Successfully Processed {}".format(s3_object_path))
-      #time.sleep(1)
-    except:
-      print("No more messages available")
+def run_classify():
+  while get_num_messages_available() > 0:
+      #try:
+        print("Retrieving Image Link from SQS")
+        s3_object_path, receipt_handle = get_latest_message()
+        process_image(s3_object_path)
+        delete_message(receipt_handle)
+        print("Successfully Processed {}".format(s3_object_path))
+        #time.sleep(1)
+      #except:
+      #  print("No available messages at this time")  
+
+def create_processes(num):
+    for x in range(num):
+        try:
+            #_thread.start_new_thread(run_classify)
+            #threading.Thread(target=run_classify).start()
+            p = multiprocessing.Process(target=run_classify)
+            p.start()
+        
+        except:
+            print("Unexpected error:", sys.exc_info()[0])
+            raise
+            #print("Error: Unable to start thread")
+
+create_processes(3)
 
 print("Job Complete. Shutting Down")
 #ec2.stop_instances(InstanceIds=[instance_id])
