@@ -6,6 +6,12 @@ aws_region='us-east-1'
 
 dynamodb = boto3.resource('dynamodb',region_name=aws_region,endpoint_url='https://dynamodb.us-east-1.amazonaws.com')
 
+"""
+# Usage
+unsorted = get_classifications_dict()
+sorted = natsort_dict(unsorted)
+"""
+
 
 def get_classifications_dict():
   """ Returns a dictionary of images to classifications retrieved from DynamoDB """
