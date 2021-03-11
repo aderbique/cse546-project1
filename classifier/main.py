@@ -12,6 +12,8 @@ aws_region='us-east-1'
 #SQS Queue URL
 queue_url = 'https://sqs.us-east-1.amazonaws.com/170322465562/queue'
 
+results_s3 = "cse546-project1-output"
+
 try:
   run_cont =  os.environ['RUN_CONTINUOUSLY']
 except:
@@ -87,6 +89,12 @@ def put_classification(image_key,classification,s3_location):
           'S3Location':s3_location
       }
   )
+
+  # Forced to put this in due to assignment requirements :( Dynamo or object tagging is far superior
+  response = s3.put_object(
+              Bucket=results_s3,
+                  Key="{}_{}".format(image_key,classification).replace(" ", "_")
+                  )
   return response
 
 def process_image(s3_object_path):
