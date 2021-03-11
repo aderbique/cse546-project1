@@ -16,6 +16,10 @@ def get_classifications_dict():
     classifications[item['ImageName']] = item['Classification']
   return classifications.items()
 
-#print(get_classifications_dict())
-for key, value in natsorted(get_classifications_dict()): # Note the () after items!
-  print(key, value)
+
+def natsort_dict(dict):
+  result = {}
+  for key, value in natsorted(dict): # Note the () after items!
+    result[key] = value
+  return result
+
