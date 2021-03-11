@@ -15,7 +15,7 @@ response = client.receive_message(
     AttributeNames=['SentTimestamp'],
     MaxNumberOfMessages=1,
     MessageAttributeNames=['All'],
-    VisibilityTimeout=0,
+    VisibilityTimeout=10,
     WaitTimeSeconds=0
     )
 
@@ -23,13 +23,12 @@ message = response['Messages'][0]
 receipt_handle = message['ReceiptHandle']
 
 #Delete message from queue
-"""
+
 # Delete message from queue
 client.delete_message(
     QueueUrl=queue_url,
     ReceiptHandle=receipt_handle
     )
-"""
 
 print('Received message: %s' % message)
 
