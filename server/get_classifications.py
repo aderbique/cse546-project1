@@ -15,12 +15,15 @@ sorted = natsort_dict(unsorted)
 
 def get_classifications_dict():
   """ Returns a dictionary of images to classifications retrieved from DynamoDB """
-  classifications = {}
-  table = dynamodb.Table('Classifications')
-  response = table.scan()
-  for item in response['Items']:
-    classifications[item['ImageName']] = item['Classification']
-  return classifications.items()
+  try:
+    classifications = {}
+    table = dynamodb.Table('Classifications')
+    response = table.scan()
+    for item in response['Items']:
+      classifications[item['ImageName']] = item['Classification']
+    return classifications.items()
+  except:
+      return {}
 
 
 def natsort_dict(dict):

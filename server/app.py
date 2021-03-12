@@ -5,8 +5,9 @@ import boto3
 from botocore.exceptions import NoCredentialsError
 from boto3.dynamodb.conditions import Key
 import get_classifications
+import reset as resetti
 from natsort import natsorted
-
+import sys
 
 
 app = Flask(__name__)
@@ -50,6 +51,11 @@ def get_output_from_dynamo():
     results_sorted = get_classifications.natsort_dict(results)
     return results_sorted
 
+
+@app.route('/healthcheck')
+def healthcheck():
+    return """Healthy"""
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -63,10 +69,21 @@ def upload_files():
                 uploaded = upload_file_to_s3(uploaded_file, 'cse546-project1')
 
                 # Get the queue. This returns an SQS.Queue instance
-                sqs.send_message(QueueUrl=queue_url,MessageBody=uploaded, MessageGroupId='messageGroup1')
+                #sqs.send_message(QueueUrl=queue_url,MessageBody=uploaded, MessageGroupId='messageGroup1')
     return redirect(url_for('index'))
     
-@app.route('/results', methods=['POST'])
+@app.route('/reset')
+def reset():
+    try:
+      result = resetti.reset()
+      return("Reset Successful")
+    except:
+        print("Unexpected Error:", sys.exc_info()[0])
+        raise
+#      return("Error performing reset")
+
+
+@app.route('/results')
 def get_results():
     results = get_output_from_dynamo()
     print("Finished")
@@ -77,6 +94,4 @@ app.run(
     port=int(os.getenv('PORT', '8080'))
 )
 
-@app.route('/healthcheck')
-def health_check():
-    return "healthy"
+#    return '<html><head>Healthy</head><body>' + content + '</body></html>'
