@@ -1,4 +1,4 @@
-<mxfile modified="2021-03-12T07:18:54.636Z" host="app.diagrams.net" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36" etag="DdZ2a6a_VFbFqjW48DKN" version="14.4.2" type="github">
+<mxfile modified="2021-03-12T07:19:58.176Z" host="app.diagrams.net" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36" etag="2TyEdn7S8CUKFkc-QE1f" version="14.4.2" type="github">
   <diagram id="Ht1M8jgEwFfnCIfOTk4-" name="Page-1">
     <mxGraphModel dx="2062" dy="1122" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
@@ -63,8 +63,8 @@
         <mxCell id="rJ63JCDpJ8ZzqB0Vquzb-14" value="Autoscaling Group&lt;br&gt;Min 1, Max 5" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
           <mxGeometry x="310" y="500" width="110" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="rJ63JCDpJ8ZzqB0Vquzb-16" value="&lt;b&gt;WebTier Target Group&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
-          <mxGeometry x="290" y="236.5" width="140" height="20" as="geometry" />
+        <mxCell id="rJ63JCDpJ8ZzqB0Vquzb-16" value="&lt;b&gt;WebTier EC2 Fleet&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="236.5" width="120" height="20" as="geometry" />
         </mxCell>
         <mxCell id="rJ63JCDpJ8ZzqB0Vquzb-26" value="" style="rounded=1;arcSize=10;dashed=1;fillColor=none;gradientColor=none;dashPattern=8 3 1 3;strokeWidth=2;" vertex="1" parent="1">
           <mxGeometry x="650" y="266.5" width="150" height="230" as="geometry" />
