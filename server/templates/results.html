@@ -3,12 +3,39 @@
   <head>
     <title>Output</title>
   </head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 30%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
   <body>
-    <h1>Results</h1>
+    <h2>Image Classification Results</h2>
+    <table>
+      <tr>
+        <th>Image</th>
+	<th>Classification</th>
+      </tr>
     <ul>
     {% for key, value in results.items() %}
-    	<p> {{ key }} -> {{ value }} </p>
+        <tr>
+    	  <td>{{ key }}</td>
+          <td>{{ value }}</td>
+        </tr>
     {% endfor %}
     </ul>
+  </table>
   </body>
 </html>
