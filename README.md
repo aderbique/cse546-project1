@@ -11,6 +11,11 @@ Autoscaling Application for Image Classification using Python on AWS
 
 ## Instructions for Deployment
 Refer to the cloud architecture diagram for insight into how to implement this workload.
+### Requirements
+- IAM roles configured
+- Infrastructure set up to specification of architecture diagram
+- General knowledge of Python
+- General knowledge of AWS
 
 ## Instructions for Starting and Stopping Workload
 First, navigate to EC2 service in the `us-east-1` region.
