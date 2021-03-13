@@ -9,6 +9,8 @@ Cloud Computing Project One for ASU CSE546 Spring 21
 ## Overview
 Autoscaling Application for Image Classification using Python on AWS
 
+![Architecture Diagram](documents/cloud_architecture.png)
+
 ## Instructions for Deployment
 Refer to the cloud architecture diagram for insight into how to implement this workload.
 ### Requirements
@@ -62,11 +64,13 @@ cd cse546-project1/server
 python3 app.py
 ```
 ### Classifier/
-This contains code to rune a Python based image classification application. 
+This contains code to run a Python based image classification application. 
 #### Usage
 ```
 cd cse546-project1/classifer
 python3 main.py
 ```
 ### Documents/
+- [Project Report](documents/project_report.pdf)
+- [Architecture Diagram](documents/cloud_architecture.png)
 
