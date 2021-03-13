@@ -47,4 +47,21 @@ If in the event that the webserver is already running and needs to be stopped, y
 $ tmux a
 ```
 
-## Instructions for Using image recognition service
+## Repository Directory Structure
+- Note: Each component of the application has different dependencies. Each component has a requirements.txt with all requirements listed for python code to run.
+### Server/
+This contains code to run a Python flask web server. This configuration is what's used to run the web tier of the application.
+#### Usage
+```
+cd cse546-project1/server
+python3 app.py
+```
+### Classifier/
+This contains code to rune a Python based image classification application. 
+#### Usage
+```
+cd cse546-project1/classifer
+python3 main.py
+```
+### Documents/
+
