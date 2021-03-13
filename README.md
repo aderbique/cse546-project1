@@ -73,4 +73,5 @@ python3 main.py
 ### Documents/
 - [Project Report](documents/cse546_project_1_report.pdf)
 - [Architecture Diagram](documents/cloud_architecture.png)
+- [Overleaf LaTeX Document](https://www.overleaf.com/read/kyjnkwbnptfn)
 
