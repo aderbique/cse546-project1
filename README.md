@@ -71,6 +71,6 @@ cd cse546-project1/classifer
 python3 main.py
 ```
 ### Documents/
-- [Project Report](documents/project_report.pdf)
+- [Project Report](documents/cse546_project_1_report.pdf)
 - [Architecture Diagram](documents/cloud_architecture.png)
 
